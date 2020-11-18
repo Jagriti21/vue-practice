@@ -4,8 +4,11 @@ import App from './App.vue'
 import Register from "./components/Register"
 import Home from "./components/Home"
 import Login from "./components/Login"
+import Vuelidate from 'vuelidate';
+import AccountDetails from './components/AccountDetails'
 
 Vue.use(VueRouter)
+Vue.use(Vuelidate)
 
 const spaRoutes = new VueRouter({
   routes:[
@@ -15,11 +18,18 @@ const spaRoutes = new VueRouter({
     },
     {
       path:'/register',
+      name: 'Register',
       component: Register
     },
     {
       path: '/login',
+      name: 'Login',
       component: Login
+    },
+    {
+      path: '/AccountDetails',
+      name: 'AccountDetails',
+      component: AccountDetails
     }
   ],
   mode:'history'
