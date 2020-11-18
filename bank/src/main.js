@@ -6,6 +6,7 @@ import Home from "./components/Home"
 import Login from "./components/Login"
 import Vuelidate from 'vuelidate';
 import AccountDetails from './components/AccountDetails'
+import UpdateDetails from './components/UpdateDetails'
 
 Vue.use(VueRouter)
 Vue.use(Vuelidate)
@@ -30,6 +31,11 @@ const spaRoutes = new VueRouter({
       path: '/AccountDetails',
       name: 'AccountDetails',
       component: AccountDetails
+    },
+    {
+      path: '/UpdateDetails',
+      name: 'UpdateDetails',
+      component: UpdateDetails
     }
   ],
   mode:'history'

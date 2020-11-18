@@ -183,13 +183,14 @@
 
       <button
         type="submit"
-        class="btn btn-large btn-block btn-primary full-width"
+        class="btn btn-large btn-block btn-success full-width"
       >
         Submit
       </button>
-
+        <br>
+        Want to cancel? click
       <router-link to="/">
-        <button class="btn btn-large btn-block btn-success full-width">
+        <button class="btn btn-large  btn-danger full-width">
           Cancel
         </button>
       </router-link>

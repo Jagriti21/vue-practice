@@ -24,19 +24,21 @@
       </div>
       <button
         
-        class="btn btn-large btn-block btn-primary full-width"
+        class="btn btn-large btn-block btn-success full-width"
         @click="addToAPI()"
       >
-        Signin
+        Login
       </button>
-      <!-- <router-link to="/Register">
+      <br><br>
+      Not registered?
+      <router-link to="/Register">
         <button
           type="submit"
-          class="btn btn-large btn-block btn-primary full-width"
+          class="btn btn-small  btn-primary full-width"
          >
-          Signup
+           Register here
         </button>
-      </router-link> -->
+      </router-link> 
     </form>
   </div>
 </template>
