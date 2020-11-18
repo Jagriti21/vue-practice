@@ -33,7 +33,7 @@ const spaRoutes = new VueRouter({
       component: AccountDetails
     },
     {
-      path: '/UpdateDetails',
+      path: '/UpdateDetails/:username',
       name: 'UpdateDetails',
       component: UpdateDetails
     }

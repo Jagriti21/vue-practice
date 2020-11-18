@@ -46,11 +46,11 @@
             <td>{{ accounts.accounttype }}</td>
           </tr>
         </table>
-         <router-link to="/UpdateDetails">
-        <button class="btn btn-large btn-block btn-primary full-width">
+         
+        <button class="btn btn-large btn-block btn-primary full-width" @click="updateAccount(userid)">
           Update
         </button>
-      </router-link>
+      
       </li>
   </div>
 </template>
@@ -69,6 +69,14 @@ export default {
     this.getAccounts();
   },
   methods: {
+      updateAccount: function(id){
+            console.log(id)
+            console.log(this.$router)
+            this.$router.push({
+                path:'/UpdateDetails/'+id,
+                params:{username:id}
+            })
+        },
     getAccounts: function () {
       axios
         .get("http://127.0.0.1:5000/Account/" + this.userid)
