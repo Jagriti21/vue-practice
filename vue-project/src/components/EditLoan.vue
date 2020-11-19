@@ -1,0 +1,98 @@
+<template>
+    <div class="container">
+        <h1>{{message}} </h1>
+        <div class="well">
+            <form>
+                <div class="form-group">
+                    <label >Loan Type: </label>
+                    <input class="form-control" type="text" v-model="editLoan.loantype">
+                </div>
+                <div class="form-group">
+                    <label >Loan Amount: </label>
+                    <input class="form-control" type="text" v-model="editLoan.loanamount">
+                </div>
+                <div class="form-group">
+                    <label >Date: </label>
+                    <input class="form-control" type="date" v-model="editLoan.date">
+                </div>
+                <div class="form-group">
+                    <label >Rate of interest: </label>
+                    <input class="form-control" type="text" v-model="editLoan.rateofinterest">
+                </div>
+                <div class="form-group">
+                    <label >Duration of loan: </label>
+                    <input class="form-control" type="text" v-model="editLoan.durationofloan">
+                </div>
+                    <br>
+                    <button class="btn btn-large  btn-success full-width" v-on:click.prevent="editLoanForm" v-on:click="isEditing =!isEditing">Update</button>
+                    
+                    <button class="btn btn-large btn-danger full-width"  v-on:click.prevent="cancel" >Cancel</button>
+            </form>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data: function(){
+        return {
+            id: this.$route.params.username,
+            message: "Update Loan Details",
+            errorMessage:'',
+            editLoan:{
+                loantype:'',
+                username:this.$route.params.username,
+                loanamount:'',
+                date:'',
+                rateofinterest:'',
+                durationofloan:''
+            }
+        }
+    },
+    mounted: function(){
+        this.getLoan()
+    },
+    methods:{
+        getLoan: function(){
+            this.$http.get("http://127.0.0.1:5000/Loan/"+this.id)
+            .then(response =>{
+                this.editLoan=response.data[0]
+                console.log(this.editLoan)
+            }).catch(error=>{
+                // console.log(this.loans)
+                //  console.clear({{loan._id.$oid}});
+                if(error.response.status==404){
+                    this.loans=error.response.data
+                }
+                //  console.log(this.loans.length)
+                //  console.log(this.loans)
+            })
+        },
+        editLoanForm: function(){
+            console.log(this.id)
+            this.$http.put("http://127.0.0.1:5000/Loan/"+this.id,this.editLoan)
+            .then(response =>{
+                console.log(response)
+                this.$router.push({
+                    path: "/show-loans/"+this.id,
+                    params:{username:this.id}
+                }); 
+            }).catch(error=>{
+                if(error.response.status==404){
+                    this.errorMessage=error.response.data.output
+                }
+                console.log(error.response)
+            })
+        },
+        cancel:function(){
+            console.log(this.isEditing)
+            this.$router.push({
+                    path: "/show-loans/"+this.id,
+                    params:{username:this.id}
+                });
+        }
+    },
+}
+</script>
+<style scoped>
+
+</style>

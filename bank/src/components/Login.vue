@@ -67,7 +67,7 @@ export default {
       };
       console.log(newUser);
       axios
-        .get("http://127.0.0.1:5000/Account/" +username)
+        .get("http://127.0.0.1:5000/Account/" +newUser.username)
         .then((response) => {
           console.log(response.data);
           //router.push({ name: 'accountdetails' })
