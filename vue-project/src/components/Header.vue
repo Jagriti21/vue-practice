@@ -1,6 +1,11 @@
 <template>
     <div class="header">
+        <div id= "container">
         <h1>{{message}}</h1>
+        <router-link to="/">
+        <button class="btn btn-large btn-primary full-width" style="float:left;">Home</button>
+        </router-link>
+        </div>
     </div>
 </template>
 <script>

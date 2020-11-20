@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>{{message}} </h1>
+        <h4>{{message}}</h4>
         <div class="well">
             <form>
                 <div class="form-group">
@@ -25,7 +25,7 @@
                 </div>
                     <br>
                     <button class="btn btn-large  btn-success full-width" v-on:click.prevent="editLoanForm" v-on:click="isEditing =!isEditing">Update</button>
-                    
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <button class="btn btn-large btn-danger full-width"  v-on:click.prevent="cancel" >Cancel</button>
             </form>
         </div>
@@ -53,9 +53,12 @@ export default {
     },
     methods:{
         getLoan: function(){
-            this.$http.get("http://127.0.0.1:5000/Loan/"+this.id)
+            
+            this.$http.get("http://127.0.0.1:5000/loans/user/"+this.id)
             .then(response =>{
-                this.editLoan=response.data[0]
+                console.log("edit response here")
+                console.log(response)
+                this.editLoan=response.data
                 console.log(this.editLoan)
             }).catch(error=>{
                 // console.log(this.loans)
@@ -69,12 +72,12 @@ export default {
         },
         editLoanForm: function(){
             console.log(this.id)
-            this.$http.put("http://127.0.0.1:5000/Loan/"+this.id,this.editLoan)
+            this.$http.put("http://127.0.0.1:5000/loans/user/"+this.id,this.editLoan)
             .then(response =>{
                 console.log(response)
                 this.$router.push({
-                    path: "/show-loans/"+this.id,
-                    params:{username:this.id}
+                    path: "/show-loans/"+this.editLoan.username,
+                    params:{username:this.editLoan.username}
                 }); 
             }).catch(error=>{
                 if(error.response.status==404){
@@ -86,13 +89,12 @@ export default {
         cancel:function(){
             console.log(this.isEditing)
             this.$router.push({
-                    path: "/show-loans/"+this.id,
-                    params:{username:this.id}
+                    path: "/show-loans/"+this.editLoan.username,
+                    params:{username:this.editLoan.username}
                 });
         }
     },
 }
 </script>
 <style scoped>
-
 </style>
