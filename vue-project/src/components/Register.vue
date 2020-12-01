@@ -336,17 +336,15 @@ export default {
 
       console.log(newUser);
 
-      // const isvalid = this.validations;
-
-      // if (isvalid) {
+      
 
       axios
+        .post("https://l2edobifo9.execute-api.us-east-2.amazonaws.com/dev/accounts",newUser)
 
-        .post("http://127.0.0.1:5000/Account", newUser)
+        //.post("http://127.0.0.1:5000/Account", newUser)
 
         .then((response) => {
           console.log(response);
-          // router.push({ name: 'Login' })
           this.$router
             .push({
               path: "/login",
@@ -360,7 +358,7 @@ export default {
         });
     },
 
-    // },
+    
   },
 };
 </script>

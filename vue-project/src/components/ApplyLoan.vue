@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>{{message}}</h1>
+        <h4>{{message}}</h4>
         <div class="well">
             <form>
                 <div class="form-group">
@@ -53,12 +53,12 @@ export default {
     methods:{
         signupForm: function(){
             console.log(this.applyLoan)
-            this.$http.post("http://127.0.0.1:5000/Loan",this.applyLoan)
+            this.$http.post("https://l2edobifo9.execute-api.us-east-2.amazonaws.com/dev/loan",this.applyLoan)
+            // this.$http.post("http://127.0.0.1:5000/Loan",this.applyLoan)
             .then(response =>{
                 console.log(response)
                 this.$router.push({
                     path: "/show-loans/" + this.id,
-
                     params: { username: this.id },
                 });
             }).catch(error=>{
@@ -73,7 +73,6 @@ export default {
             console.log(this.isEditing)
                 this.$router.push({
                     path: "/show-loans/" + this.id,
-
                     params: { username: this.id },
                 });
         }
@@ -82,9 +81,7 @@ export default {
         console.log("this is the param from apply loan")
         console.log(this.$route.params)
     }
-
 }
 </script>
 <style scoped>
-
 </style>

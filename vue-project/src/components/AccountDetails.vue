@@ -1,5 +1,11 @@
 <template>
   <div class="container">
+    <router-link to="/login">
+        <button class="btn btn-large  full-width" style="float: right;">
+          logout
+        </button>
+    </router-link>
+    &nbsp;&nbsp;
     <button
         class="btn btn-large btn-success full-width" style="float: right;"
         @click="loansdetails(userid)"
@@ -7,7 +13,7 @@
         Show Loans
       </button>
     <div v-for="accounts in accounts" v-bind:key="accounts.id">
-      <h1>{{ message }}</h1>
+      <h4>{{ message }}</h4>
       
       <hr />
 
@@ -24,11 +30,10 @@
           <td>{{ accounts.username }}</td>
         </tr>
 
-        <tr>
+        <!-- <tr>
           <th>Password</th>
-
           <td>{{ accounts.password }}</td>
-        </tr>
+        </tr> -->
 
         <tr>
           <th>Email</th>
@@ -80,10 +85,10 @@
       </table>
 
       <button
-        class="btn btn-large btn-block btn-primary full-width"
+        class="btn btn-large  btn-primary full-width"
         @click="updateAccount(userid)"
       >
-        Update
+        Edit
       </button>
     </div>
   </div>
@@ -91,69 +96,49 @@
 
 <script>
 import axios from "axios";
-
 export default {
   data: function () {
     return {
       message: "Account details",
-
       userid: this.$route.params.username,
-
       isEditing: false,
-
       accounts: Array,
     };
   },
-
   mounted: function () {
     this.getAccounts();
   },
-
   methods: {
     updateAccount: function (id) {
       console.log(id);
-
       console.log(this.$router);
-
       this.$router.push({
         path: "/UpdateDetails/" + id,
-
         params: { username: id },
       });
     },
     loansdetails: function(id){
         console.log(id);
-
       console.log(this.$router);
-
       this.$router.push({
         path: "/show-loans/" + id,
-
         params: { username: id },
       });
     },
     getAccounts: function () {
       axios
-
-        .get("http://127.0.0.1:5000/Account/" + this.userid)
-
+        .get("https://gs33tlvm34.execute-api.us-east-2.amazonaws.com/Dev/account/" + this.userid)
         .then((response) => {
           this.accounts = response.data;
-
           console.log(response);
-
           console.log(this.accounts);
-
           console.log(status);
         })
-
         .catch((error) => {
           if (error.response.status == 404) {
             this.accounts = error.response.data;
           }
-
           console.log(this.accounts.length);
-
           console.log(this.accounts);
         });
     },

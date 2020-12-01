@@ -44,10 +44,8 @@ export default {};
 <style scoped>
 ol {
   list-style-type: none;
-
   display: flex;
 }
-
 li {
   margin-right: 20px;
 }

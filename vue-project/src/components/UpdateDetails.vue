@@ -1,6 +1,11 @@
 <template>
     <div class="container">
-        <h1>{{message}} for {{id}}</h1>
+        <router-link to="/login">
+        <button class="btn btn-large full-width" style="float: right;">
+          logout
+        </button>
+    </router-link>
+        <h4>{{message}}</h4>
         <div class="well">
             <form>
                 <div class="form-group">
@@ -57,7 +62,7 @@
                     </div>
                     
                     <br>
-                    <button class="btn btn-large btn-block btn-success full-width" v-on:click.prevent="editAccountForm">Apply</button>
+                    <button class="btn btn-large btn-block btn-success full-width" v-on:click.prevent="editAccountForm">Update</button>
                     <br>
                     Want to cancel?
                     <button class="btn btn-large btn-danger" v-on:click.prevent="cancel" >Cancel</button>
@@ -71,7 +76,7 @@ export default {
     data: function(){
         return {
             id: this.$route.params.username,
-            message: " Edit Account",
+            message: "Edit Account Details",
             errorMessage:'',
             editAccount:{
                 name:'',
@@ -94,7 +99,7 @@ export default {
     methods:{
         getAccount: function(){
             console.log(this.editAccount.username)
-            axios.get("http://127.0.0.1:5000/Account/"+this.editAccount.username)
+            axios.get("https://gs33tlvm34.execute-api.us-east-2.amazonaws.com/Dev/account/"+this.editAccount.username)
             .then(response =>{
                 this.editAccount=response.data[0]
                 console.log(this.editAccount)
@@ -108,7 +113,7 @@ export default {
         },
         editAccountForm: function(){
             console.log(this.id)
-            axios.put("http://127.0.0.1:5000/Account/"+this.id,this.editAccount)
+            axios.put("https://gs33tlvm34.execute-api.us-east-2.amazonaws.com/Dev/account/"+this.id,this.editAccount)
             .then(response =>{
                 console.log(response)
                 this.$router.push({
@@ -133,5 +138,4 @@ export default {
 }
 </script>
 <style scoped>
-
 </style>

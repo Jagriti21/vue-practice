@@ -57,11 +57,6 @@
 
 
 <script>
-/*eslint-disable */
-
-// import axios from "axios";
-
-//import router from '../main';
 
 export default {
   data() {
@@ -74,30 +69,29 @@ export default {
       }
     }
   },
-//   mounted: function(){
-//       this.
-//   },
+
   methods: {
     addToAPI() {
       console.log(this.User);
-        this.$http.get("http://127.0.0.1:5000/Account/" + this.User.username)
+        //this.$http.get("http://127.0.0.1:5000/Account/" + this.User.username)
+        this.$http.post("https://l2edobifo9.execute-api.us-east-2.amazonaws.com/dev/accounts/" + this.User.username)
         .then((response) => {
-          console.log(response.data[0].username);
-             if(this.User.username==response.data[0].username && this.User.password==response.data[0].password){
+          //console.log(response.data[0].username);
+          console.log(response.data)
+              if (response.username === this.username && response.password === this.password) {
+              //if(this.User.username==response.data[0].username && this.User.password==response.data[0].password){
                 this.$router.push({
                     path: "/AccountDetails/"+this.User.username,
                     params:{username:this.User.username}
                 }); 
-             }
+              }
 
              else{
                
                  this.isEditting=true
                  this.message = "Username/password is wrong"
              }
-        //   this.$router.push({
-        //     path: "/AccountDetails",
-        //   });
+        
         })
 
         .catch((error) => {
